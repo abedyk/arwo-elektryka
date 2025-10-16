@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARWO Elektryka – Usługi elektryczne | Montaż, modernizacje, awarie</title>
+  <meta name="description" content="ARWO Elektryka – montaż i modernizacja instalacji elektrycznych, usuwanie awarii, rozdzielnice, oświetlenie, pomiary. Zadzwoń: +48 579 980 110 lub +48 607 402 802" />
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" type="image/png" href="arwo-elektryka-logo.png">
+  <meta property="og:title" content="ARWO Elektryka – Usługi elektryczne" />
+  <meta property="og:description" content="Montaż i modernizacja instalacji, rozdzielnice, oświetlenie, podłączenia, awarie, pomiary." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://przyklad.pl" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/ffffff/0f766e&text=ARWO+Elektryka" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { padding-top: 90px; } /* odstęp, by treść nie chowała się pod stałym paskiem */
+  </style>
+</head>
+<body class="bg-neutral-50 text-neutral-800">
+
+  <!-- Stały górny pasek z logiem i efektem zanikania -->
+<div id="topbar" class="fixed top-0 left-0 w-full bg-neutral-900/100 backdrop-blur-md text-neutral-100 z-50 shadow-lg transition-all duration-300">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-8 h-20 md:h-24">
+    
+    <!-- Logo po lewej -->
+    <div class="flex items-center gap-3">
+      <img src="arwo-elektryka-logo.png" alt="ARWO Elektryka logo"
+           class="h-12 sm:h-14 md:h-16 lg:h-20 w-auto drop-shadow-md transition-all duration-300" />
+      <span class="font-semibold text-base sm:text-lg md:text-xl">ARWO Elektryka</span>
+    </div>
+
+    <!-- Kontakt po prawej -->
+    <div class="flex flex-wrap gap-3 text-sm sm:text-base">
+      <a class="hover:underline" href="tel:+48579980110">+48 579 980 110</a>
+      <span>|</span>
+      <a class="hover:underline" href="tel:+48607402802">+48 607 402 802</a>
+      <span class="hidden md:inline">|</span>
+      <a class="hidden md:inline hover:underline" href="mailto:arwo.elektryka@gmail.com">arwo.elektryka@gmail.com</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Efekt: pasek czarny u góry, półprzezroczysty po przewinięciu
+  window.addEventListener('scroll', () => {
+    const topbar = document.getElementById('topbar');
+    if (window.scrollY > 50) {
+      // Po przewinięciu - bardziej przezroczysty
+      topbar.classList.remove('bg-neutral-900/100');
+      topbar.classList.add('bg-neutral-900/60', 'shadow-md');
+    } else {
+      // Na górze - pełny czarny
+      topbar.classList.remove('bg-neutral-900/60', 'shadow-md');
+      topbar.classList.add('bg-neutral-900/100');
+    }
+  });
+</script>
+
+
+
+  <!-- Hero -->
+  <!-- HERO z logotypem wyśrodkowanym i dopasowanym tłem -->
+<header class="relative overflow-hidden bg-[#f9f8f3]"> 
+  <!-- kolor tła dopasowany do tła loga -->
+  <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      
+      <!-- Lewa kolumna: tekst -->
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-neutral-900">
+          Usługi elektryczne<br>
+          <span class="text-teal-700">montaż · modernizacja · awarie</span>
+        </h1>
+        <p class="mt-5 text-lg text-neutral-700">
+          Montaż instalacji, rozdzielnice, oświetlenie, podłączenia urządzeń, pomiary.
+          Szybkie terminy i solidne wykonanie.
+        </p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="#kontakt" class="inline-flex items-center gap-2 rounded-2xl bg-teal-700 text-white px-5 py-3 font-semibold shadow hover:bg-teal-800">Zadzwoń teraz</a>
+          <a href="#uslugi" class="inline-flex items-center gap-2 rounded-2xl border border-neutral-300 bg-white px-5 py-3 font-semibold hover:border-neutral-400">Zobacz usługi</a>
+        </div>
+      </div>
+
+      <!-- Prawa kolumna: logo "sticky" tylko w obrębie hero -->
+      <div class="relative flex justify-center md:justify-end">
+        <div class="sticky top-24 md:top-28 lg:top-32">
+          <img
+            src="arwo-elektryka-logo.png"
+            alt="ARWO Elektryka"
+            class="w-64 md:w-72 lg:w-80 xl:w-[22rem] drop-shadow-xl rounded-xl select-none pointer-events-none"
+            oncontextmenu="return false;" ondragstart="return false;" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+
+  <!-- Usługi -->
+  <section id="uslugi" class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold">Zakres usług</h2>
+      <p class="text-neutral-600 mt-1">Kompleksowe prace elektryczne dla domu i firmy.</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Montaż instalacji elektrycznej</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Modernizacja instalacji</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Podłączenie gniazd i włączników</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Montaż lamp / oświetlenia</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Montaż rozdzielnic</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Podłączanie płyt grzewczych</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Wymiana tablic licznikowych</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Przyłącza</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Usuwanie awarii</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Projekty i pomiary</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O nas -->
+  <section id="o-nas" class="py-14 bg-white border-y border-neutral-200">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
+      <div>
+        <h2 class="text-3xl font-bold">Dlaczego my?</h2>
+        <ul class="mt-4 space-y-2 text-neutral-700 list-disc list-inside">
+          <li>Terminowość i dbałość o szczegóły</li>
+          <li>Przejrzyste wyceny i gwarancja na wykonane prace</li>
+          <li>Materiały renomowanych producentów</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-neutral-200 p-6">
+        <h3 class="font-semibold text-lg">Dane firmy</h3>
+        <p class="mt-2">ARWO Elektryka</p>
+        <p><a class="text-teal-700 hover:underline" href="mailto:arwo.elektryka@gmail.com">arwo.elektryka@gmail.com</a></p>
+        <p><a class="text-teal-700 hover:underline" href="tel:+48579980110">+48 579 980 110</a> · <a class="text-teal-700 hover:underline" href="tel:+48607402802">+48 607 402 802</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt -->
+  <section id="kontakt" class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold">Kontakt i szybkie zgłoszenie</h2>
+      <p class="text-neutral-600 mt-1">Najlepiej zadzwonić. Możesz też wysłać wiadomość z opisem zlecenia.</p>
+      <div class="grid md:grid-cols-3 gap-8 mt-8">
+        <div class="md:col-span-2 bg-white rounded-2xl border border-neutral-200 shadow p-6">
+          <form name="kontakt" class="space-y-4" onsubmit="event.preventDefault(); alert('Dziękujemy! Odezwiemy się wkrótce.');">
+            <div>
+              <label class="block text-sm font-medium">Imię i nazwisko</label>
+              <input required type="text" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400" />
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium">Telefon</label>
+                <input type="tel" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium">E-mail</label>
+                <input type="email" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium">Opis zlecenia</label>
+              <textarea required rows="4" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-400"></textarea>
+            </div>
+            <button class="rounded-2xl bg-teal-700 text-white px-5 py-3 font-semibold shadow hover:bg-teal-800">Wyślij</button>
+            <p class="text-xs text-neutral-500">* Przesyłając formularz wyrażasz zgodę na kontakt w celu przedstawienia oferty.</p>
+          </form>
+        </div>
+        <div class="space-y-4">
+          <a class="block rounded-2xl border border-neutral-200 bg-white shadow p-4 hover:border-amber-300" href="https://wa.me/48579980110" target="_blank" rel="noopener">WhatsApp: +48 579 980 110</a>
+          <a class="block rounded-2xl border border-neutral-200 bg-white shadow p-4 hover:border-amber-300" href="mailto:arwo.elektryka@gmail.com">E-mail: arwo.elektryka@gmail.com</a>
+          <a class="block rounded-2xl border border-neutral-200 bg-white shadow p-4 hover:border-amber-300" href="tel:+48607402802">Zadzwoń: +48 607 402 802</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stopka -->
+  <footer class="py-10 bg-neutral-900 text-neutral-300">
+    <div class="max-w-6xl mx-auto px-4 text-sm flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
+      <p>© <span id="y"></span> ARWO Elektryka. Wszelkie prawa zastrzeżone.</p>
+      <nav class="flex gap-5">
+        <a href="#uslugi" class="hover:underline">Usługi</a>
+        <a href="#o-nas" class="hover:underline">O nas</a>
+        <a href="#kontakt" class="hover:underline">Kontakt</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

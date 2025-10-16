@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abedyk.github.io/arwo-elektryka/sitemap.xml

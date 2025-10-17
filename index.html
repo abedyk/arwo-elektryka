@@ -45,40 +45,48 @@
   <!-- === Style pomocnicze (oryginalne) === -->
   <style>
     html { scroll-behavior: smooth; }
-    /* odstęp, by treść nie chowała się pod stałym topbarem */
+    /* odstęp, by treść nie chowała się pod stałym topbarem (nadpiszemy JS-em niżej) */
     body { padding-top: 90px; }
   </style>
 
-  <!-- === DODATKOWE STYLE: tylko poprawka MOBILE dla topbaru === -->
+  <!-- === DODATKOWE STYLE: auto-układ nagłówka na telefonach === -->
   <style>
     @media (max-width: 640px) {
-      /* kontener paska */
+      /* Główny wiersz topbaru – pozwól złamać na dwie warstwy */
       #topbar .max-w-7xl > .flex {
-        height: auto;              /* zamiast sztywnego h-20 */
+        height: auto;                 /* nie trzymaj sztywnego h-20 */
         padding-top: 8px;
         padding-bottom: 8px;
         align-items: flex-start;
-        flex-wrap: wrap;           /* pozwól złamać na 2 wiersze */
-      }
-
-      /* prawa kolumna z kontaktami -> pełna szerokość pod logo */
-      #topbar .max-w-7xl > .flex > div:last-child {
-        width: 100%;
-        margin-top: 8px;
-        display: flex;
         flex-wrap: wrap;
-        gap: 6px 12px;             /* odstępy wiersz/kolumna */
-        font-size: 0.95rem;
+        gap: 8px;                     /* odstęp między logo a kontaktami */
       }
 
-      /* linki kontaktowe: nadpisz nowrap, każdy może zejść do swojej linii */
+      /* Prawa kolumna kontaktów: automatyczna siatka
+         - na bardzo wąskich tel. każdy link w swoim wierszu (1 kol.)
+         - na szerszych: 2 kolumny (jeśli się zmieści) */
+      #topbar .max-w-7xl > .flex > div:last-child {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 8px 12px;
+        width: 100%;
+        margin-top: 0;
+        font-size: clamp(14px, 3.7vw, 16px);  /* płynny rozmiar fontu */
+      }
+
+      /* Linki: pozwól zawijać tekst (nadpisanie .whitespace-nowrap) */
       #topbar .max-w-7xl > .flex > div:last-child a {
         white-space: normal !important;
-        flex: 1 1 100%;
+        min-width: 0;                 /* żeby grid mógł zwężać elementy */
         line-height: 1.25;
       }
 
-      /* logo minimalnie mniejsze dla przewiewu */
+      /* Ikony ciut mniejsze na bardzo wąskich tel. */
+      #topbar .max-w-7xl > .flex > div:last-child svg {
+        width: 16px; height: 16px;
+      }
+
+      /* Logo delikatnie mniejsze */
       #topbar img[alt*="logo"] {
         height: 40px !important;
       }
@@ -116,7 +124,7 @@
       <div class="flex items-center gap-3">
         <img src="arwo-elektryka-logo.png" alt="ARWO - Elektryka logo"
              class="h-12 sm:h-14 md:h-16 lg:h-20 w-auto drop-shadow-md transition-all duration-300" />
-        <span class="font-semibold text-base sm:text-lg md:text-xl">ARWO - Elektryka2</span>
+        <span class="font-semibold text-base sm:text-lg md:text-xl">ARWO - Elektryka</span>
       </div>
 
       <!-- Kontakt po prawej (ikonki + większe odstępy; na md+ w jednym rzędzie) -->
@@ -501,4 +509,3 @@
   </script>
 </body>
 </html>
-

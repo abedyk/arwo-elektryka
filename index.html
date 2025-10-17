@@ -42,11 +42,47 @@
   <!-- === Tailwind === -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- === Style pomocnicze === -->
+  <!-- === Style pomocnicze (oryginalne) === -->
   <style>
     html { scroll-behavior: smooth; }
     /* odstęp, by treść nie chowała się pod stałym topbarem */
     body { padding-top: 90px; }
+  </style>
+
+  <!-- === DODATKOWE STYLE: tylko poprawka MOBILE dla topbaru === -->
+  <style>
+    @media (max-width: 640px) {
+      /* kontener paska */
+      #topbar .max-w-7xl > .flex {
+        height: auto;              /* zamiast sztywnego h-20 */
+        padding-top: 8px;
+        padding-bottom: 8px;
+        align-items: flex-start;
+        flex-wrap: wrap;           /* pozwól złamać na 2 wiersze */
+      }
+
+      /* prawa kolumna z kontaktami -> pełna szerokość pod logo */
+      #topbar .max-w-7xl > .flex > div:last-child {
+        width: 100%;
+        margin-top: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 12px;             /* odstępy wiersz/kolumna */
+        font-size: 0.95rem;
+      }
+
+      /* linki kontaktowe: nadpisz nowrap, każdy może zejść do swojej linii */
+      #topbar .max-w-7xl > .flex > div:last-child a {
+        white-space: normal !important;
+        flex: 1 1 100%;
+        line-height: 1.25;
+      }
+
+      /* logo minimalnie mniejsze dla przewiewu */
+      #topbar img[alt*="logo"] {
+        height: 40px !important;
+      }
+    }
   </style>
 
   <!-- === Dane strukturalne: LocalBusiness (Schema.org) === -->
@@ -122,6 +158,22 @@
         topbar.classList.add('bg-neutral-900/100');
       }
     });
+  </script>
+
+  <!-- DODATKOWY SKRYPT: automatyczny padding-top pod realną wysokość topbaru -->
+  <script>
+    (function () {
+      const topbar = document.getElementById('topbar');
+      function applyBodyOffset() {
+        if (!topbar) return;
+        document.body.style.paddingTop = (topbar.offsetHeight || 0) + 'px';
+      }
+      window.addEventListener('load', applyBodyOffset, { passive: true });
+      window.addEventListener('resize', applyBodyOffset, { passive: true });
+      window.addEventListener('scroll', () => {
+        requestAnimationFrame(applyBodyOffset);
+      }, { passive: true });
+    })();
   </script>
 
   <!-- HERO z logotypem wyśrodkowanym i dopasowanym tłem -->

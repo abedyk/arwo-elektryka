@@ -45,7 +45,7 @@
   <!-- === Style pomocnicze === -->
   <style>
     html { scroll-behavior: smooth; }
-    /* padding-top ustawiany dynamicznie w JS wg rzeczywistej wysokości topbaru */
+    /* padding-top ustawiany dynamicznie w JS na podstawie wysokości topbaru */
     body { padding-top: 0; }
   </style>
 
@@ -72,11 +72,10 @@
 </head>
 <body class="bg-neutral-50 text-neutral-800">
 
-  <!-- === TOPBAR: zwijany tylko na mobile, stały na md+ === -->
-  <div id="topbar"
-       class="fixed top-0 left-0 w-full bg-neutral-900/100 backdrop-blur-md text-neutral-100 z-50 shadow-lg
-              transition-all duration-300 will-change-transform translate-y-0 md:translate-y-0">
+  <!-- Stały górny pasek z logiem i efektami; responsywny układ bez nachodzenia -->
+  <div id="topbar" class="fixed top-0 left-0 w-full bg-neutral-900/100 backdrop-blur-md text-neutral-100 z-50 shadow-lg transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 py-2">
+      <!-- Uwaga: kolumna na mobile, rząd od md w górę -->
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-0">
 
         <!-- Logo + nazwa -->
@@ -86,9 +85,9 @@
           <span class="font-semibold text-base sm:text-lg md:text-xl truncate">ARWO - Elektryka</span>
         </div>
 
-        <!-- Kontakty (kolumna na mobile, rząd na md+) -->
+        <!-- Kontakty: pełna szerokość na mobile (3 wiersze), w jednej linii od md -->
         <div class="w-full md:w-auto flex flex-col md:flex-row md:items-center gap-2 md:gap-4 text-sm md:text-[0.95rem]">
-          <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 hover:bg-white/5 px-3 py-2 w-full md:w-auto whitespace-nowrap"
+          <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-white/0 hover:bg-white/5 px-3 py-2 w-full md:w-auto whitespace-nowrap"
              href="tel:+48579980110">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5l4 1 2 5-2 1a16 16 0 007 7l1-2 5 2 1 4c-7 2-15-6-17-13z"/>
@@ -96,7 +95,7 @@
             +48 579 980 110
           </a>
 
-          <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 hover:bg-white/5 px-3 py-2 w-full md:w-auto whitespace-nowrap"
+          <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-white/0 hover:bg-white/5 px-3 py-2 w-full md:w-auto whitespace-nowrap"
              href="tel:+48607402802">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5l4 1 2 5-2 1a16 16 0 007 7l1-2 5 2 1 4c-7 2-15-6-17-13z"/>
@@ -104,7 +103,7 @@
             +48 607 402 802
           </a>
 
-          <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 hover:bg-white/5 px-3 py-2 w-full md:w-auto break-all"
+          <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-white/0 hover:bg-white/5 px-3 py-2 w-full md:w-auto break-all"
              href="mailto:arwo.elektryka@gmail.com">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16v12H4z"/>
@@ -119,93 +118,29 @@
   </div>
 
   <script>
-    // --- Ustawienia ---
-    const MD_BREAKPOINT = 768;        // Tailwind md
-    const HIDE_THRESHOLD = 12;        // minimalny ruch (px), by zwinąć/rozwinąć
-    const TOP_OPACITY_SCROLL = 50;    // kiedy zmienić krycie topbaru
-
-    // Opaque/transparent zależnie od scrolla (jak było)
+    // Pasek: pełny czarny u góry, półprzezroczysty po przewinięciu
     function applyTopbarScrollState() {
       const topbar = document.getElementById('topbar');
-      if (window.scrollY > TOP_OPACITY_SCROLL) {
+      if (window.scrollY > 50) {
         topbar.classList.remove('bg-neutral-900/100');
-        topbar.classList.add('bg-neutral-900/60','shadow-md');
+        topbar.classList.add('bg-neutral-900/60', 'shadow-md');
       } else {
-        topbar.classList.remove('bg-neutral-900/60','shadow-md');
+        topbar.classList.remove('bg-neutral-900/60', 'shadow-md');
         topbar.classList.add('bg-neutral-900/100');
       }
     }
+    window.addEventListener('scroll', applyTopbarScrollState, { passive: true });
+    applyTopbarScrollState();
 
-    // Dynamiczny padding-top pod faktyczną wysokość topbaru
+    // Dynamiczne dopasowanie paddingu body do aktualnej wysokości topbaru (po wrapowaniu)
     function setBodyPaddingTop() {
       const topbar = document.getElementById('topbar');
       document.body.style.paddingTop = topbar.offsetHeight + 'px';
     }
-
-    // Zwijanie NAGŁÓWKA tylko na mobile
-    (function mobileCollapsingHeader(){
-      const topbar = document.getElementById('topbar');
-      let lastY = window.scrollY;
-      let ticking = false;
-
-      function showTopbar() {
-        topbar.classList.remove('-translate-y-full');
-        topbar.classList.add('translate-y-0');
-      }
-      function hideTopbar() {
-        topbar.classList.remove('translate-y-0');
-        topbar.classList.add('-translate-y-full');
-      }
-      function isMobile() { return window.innerWidth < MD_BREAKPOINT; }
-
-      function onScroll() {
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            const y = window.scrollY;
-
-            if (y <= 4) { // przy górze zawsze pokazany
-              showTopbar();
-            } else if (isMobile()) {
-              const delta = y - lastY;
-              if (delta > HIDE_THRESHOLD) hideTopbar();       // w dół -> chowamy
-              else if (delta < -HIDE_THRESHOLD) showTopbar(); // w górę -> pokazujemy
-            } else {
-              showTopbar(); // desktop zawsze widoczny
-            }
-
-            applyTopbarScrollState();
-            lastY = y;
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }
-
-      // inicjalizacja
-      applyTopbarScrollState();
-      setBodyPaddingTop();
-      window.addEventListener('load', setBodyPaddingTop);
-      window.addEventListener('resize', () => {
-        // przy zmianie trybu (obrót / breakpoint) dopasuj stan
-        showTopbar();
-        setBodyPaddingTop();
-      });
-      new ResizeObserver(setBodyPaddingTop).observe(topbar);
-      window.addEventListener('scroll', onScroll, { passive: true });
-
-      // Integracja z przyciskiem „powrót na górę” (jeśli istnieje na stronie)
-      window.addEventListener('DOMContentLoaded', () => {
-        const scrollBtn = document.getElementById('scrollTopBtn');
-        if (scrollBtn) {
-          scrollBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            showTopbar(); // natychmiast pokaż pasek
-          }, { passive: true });
-        }
-      });
-
-      onScroll(); // start
-    })();
+    window.addEventListener('load', setBodyPaddingTop);
+    window.addEventListener('resize', setBodyPaddingTop);
+    // drobna obserwacja ewentualnych zmian układu (np. webfonty)
+    new ResizeObserver(setBodyPaddingTop).observe(document.getElementById('topbar'));
   </script>
 
   <!-- HERO z logotypem wyśrodkowanym i dopasowanym tłem -->
@@ -253,11 +188,11 @@
         <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Podłączenie gniazd i włączników</h3></div>
         <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Montaż lamp / oświetlenia</h3></div>
         <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Montaż rozdzielnic</h3></div>
-        <div class="p-6 bg-white rounded-2xl shadow border-neutral-200 shadow"><h3 class="font-semibold">Podłączanie płyt grzewczych</h3></div>
-        <div class="p-6 bg-white rounded-2xl border border-neutral-200 shadow"><h3 class="font-semibold">Wymiana tablic licznikowych</h3></div>
-        <div class="p-6 bg-white rounded-2xl border border-neutral-200 shadow"><h3 class="font-semibold">Przyłącza</h3></div>
-        <div class="p-6 bg-white rounded-2xl border border-neutral-200 shadow"><h3 class="font-semibold">Usuwanie awarii</h3></div>
-        <div class="p-6 bg-white rounded-2xl border border-neutral-200 shadow"><h3 class="font-semibold">Projekty i pomiary</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Podłączanie płyt grzewczych</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Wymiana tablic licznikowych</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Przyłącza</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Usuwanie awarii</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Projekty i pomiary</h3></div>
       </div>
     </div>
   </section>
@@ -347,12 +282,10 @@
           </form>
         </div>
 
-        <!-- Karta szybkiego kontaktu: przełącznik + przycisk "Połącz" przy każdym numerze -->
+        <!-- Karta szybkiego kontaktu (bez zmian) -->
         <div class="space-y-4">
           <div class="rounded-2xl border border-neutral-200 bg-white shadow p-4">
             <h3 class="font-semibold">Szybki kontakt</h3>
-
-            <!-- przełącznik trybu połączenia -->
             <div class="mt-3 inline-flex items-center bg-neutral-100 rounded-xl p-1">
               <label class="inline-flex items-center gap-2 px-3 py-1.5 cursor-pointer">
                 <input type="radio" name="callMode" value="phone" class="peer sr-only" checked>
@@ -364,9 +297,7 @@
               </label>
             </div>
 
-            <!-- Tylko 3 pozycje: tel #1, tel #2, e-mail -->
             <ul class="mt-4 space-y-3">
-              <!-- Tel #1 -->
               <li class="flex items-center gap-3">
                 <div class="flex-1 inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white shadow p-3">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -390,7 +321,6 @@
                 </a>
               </li>
 
-              <!-- Tel #2 -->
               <li class="flex items-center gap-3">
                 <div class="flex-1 inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white shadow p-3">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -414,7 +344,6 @@
                 </a>
               </li>
 
-              <!-- E-mail -->
               <li>
                 <a class="inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white shadow p-3 hover:border-amber-300 w-full"
                    href="mailto:arwo.elektryka@gmail.com">
@@ -445,7 +374,7 @@
     </div>
   </footer>
 
-  <!-- Przycisk powrotu do góry (fade-in + scale + SVG) -->
+  <!-- Przycisk powrotu do góry -->
   <button id="scrollTopBtn"
     class="fixed bottom-6 right-6 z-50 bg-teal-700 hover:bg-teal-800 text-white rounded-full w-12 h-12 shadow-xl flex items-center justify-center
            opacity-0 pointer-events-none scale-75 translate-y-2 transition-all duration-300"
@@ -456,7 +385,7 @@
   </button>
 
   <script>
-    // Scroll-to-top — fade/scale in/out (bez zmian)
+    // Scroll-to-top — fade/scale in/out
     (function () {
       const scrollBtn = document.getElementById("scrollTopBtn");
       const showAt = 400; // px
@@ -481,9 +410,10 @@
       });
     })();
 
-    // Przełączanie Telefon / WhatsApp (bez zmian)
+    // Przełączanie trybu: Telefon / WhatsApp dla przycisków przy numerach
     (function () {
       let mode = 'phone'; // domyślnie
+
       const radios = document.querySelectorAll('input[name="callMode"]');
 
       const rows = [

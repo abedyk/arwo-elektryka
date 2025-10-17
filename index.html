@@ -44,59 +44,45 @@
 
   <!-- === Style pomocnicze (oryginalne) === -->
   <style>
-    html { scroll-behavior: smooth; }
-    /* odstęp, by treść nie chowała się pod stałym topbarem (nadpiszemy JS-em niżej) */
-    body { padding-top: 90px; }
-  </style>
-
-  <!-- === DODATKOWE STYLE: auto-układ nagłówka + drobna korekta wysokości napisu przy logo === -->
-  <style>
-    @media (max-width: 640px) {
-      /* Główny wiersz topbaru – pozwól złamać na dwie warstwy i daj więcej luzu */
-      #topbar .max-w-7xl > .flex {
-        height: auto;                 
-        padding-top: 14px;            /* +2px */
-        padding-bottom: 18px;         /* +2px */
-        align-items: flex-start;
-        flex-wrap: wrap;
-        gap: 8px;                     
-      }
-
-      /* Lewy blok (logo + napis): lekko zwiększ line-height napisu i dodaj ciut miejsca od dołu */
-      #topbar .max-w-7xl > .flex > div:first-child span {
-        line-height: 1.3;             /* było domyślne; podnosimy, by nic nie było przycięte */
-        padding-bottom: 4px;          /* drobna poduszka przeciw ucinaniu */
-        display: inline-block;
-      }
-
-      /* Logo delikatnie mniejsze, by całość złapała dodatkowy „oddech” */
-      #topbar img[alt*="logo"] {
-        height: 42px !important;      /* było 40px */
-      }
-
-      /* Prawa kolumna kontaktów: responsywna siatka auto-fit */
-      #topbar .max-w-7xl > .flex > div:last-child {
-        display: grid !important;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 8px 12px;
-        width: 100%;
-        margin-top: 0;
-        font-size: clamp(14px, 3.7vw, 16px);
-      }
-
-      /* Linki kontaktowe mogą się zawijać */
-      #topbar .max-w-7xl > .flex > div:last-child a {
-        white-space: normal !important;
-        min-width: 0;
-        line-height: 1.25;
-      }
-
-      /* Ikony ciut mniejsze */
-      #topbar .max-w-7xl > .flex > div:last-child svg {
-        width: 16px; height: 16px;
-      }
+  @media (max-width: 640px) {
+    /* --- Górny pasek (mobile) --- */
+    #topbar .max-w-7xl > .flex {
+      height: auto;
+      padding-top: 18px;        /* więcej oddechu od góry */
+      padding-bottom: 18px;     /* więcej oddechu od dołu */
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;                /* odstęp między logo a kontaktami */
     }
-  </style>
+
+    /* Logo i napis */
+    #topbar img[alt*="logo"] {
+      height: 38px !important;
+    }
+    #topbar .max-w-7xl > .flex > div:first-child span {
+      line-height: 1.35;        /* wyższy wiersz napisu */
+      padding-bottom: 6px;      /* dodaj luz pod napisem */
+      display: inline-block;
+    }
+
+    /* Kontakty — w dwóch rzędach, szeroko i przejrzyście */
+    #topbar .max-w-7xl > .flex > div:last-child {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr;   /* 2 kolumny */
+      gap: 10px 14px;
+      width: 100%;
+      font-size: clamp(14px, 3.7vw, 16px);
+      margin-top: 4px;
+    }
+
+    /* Linki kontaktowe mogą się zawijać */
+    #topbar .max-w-7xl > .flex > div:last-child a {
+      white-space: normal !important;
+      line-height: 1.3;
+      text-align: left;
+    }
+  }
+</style>
 
   <!-- === Dane strukturalne: LocalBusiness (Schema.org) === -->
   <script type="application/ld+json">
@@ -514,6 +500,7 @@
   </script>
 </body>
 </html>
+
 
 
 

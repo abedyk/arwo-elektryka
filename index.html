@@ -4,25 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- === SEO: tytuł i opis lokalny === -->
   <title>ARWO - Elektryka Łódź – Usługi elektryczne | Montaż, awarie, modernizacje</title>
   <meta name="description" content="ARWO - Elektryka: elektryk Łódź i woj. łódzkie. Montaż instalacji, modernizacje, pomiary, oświetlenie, usuwanie awarii. Zadzwoń: 579 980 110 lub 607 402 802." />
   <meta name="keywords" content="elektryk Łódź, usługi elektryczne Łódź, instalacje elektryczne Łódź, pomiary elektryczne Łódź, awarie prądu Łódź, ARWO - Elektryka, województwo łódzkie" />
   <meta name="robots" content="index,follow" />
 
-  <!-- === Geotagi (Łódź) === -->
   <meta name="geo.region" content="PL-LD" />
   <meta name="geo.placename" content="Łódź" />
   <meta name="geo.position" content="51.7592;19.4550" />
   <meta name="ICBM" content="51.7592, 19.4550" />
 
-  <!-- === Canonical === -->
   <link rel="canonical" href="https://abedyk.github.io/arwo-elektryka/" />
-
-  <!-- === Favicon === -->
   <link rel="icon" type="image/png" href="arwo-elektryka-logo.png">
 
-  <!-- === Open Graph / Facebook / WhatsApp === -->
   <meta property="og:title" content="ARWO - Elektryka Łódź – Usługi elektryczne" />
   <meta property="og:description" content="Elektryk Łódź i woj. łódzkie. Montaż instalacji, modernizacje, pomiary, oświetlenie, usuwanie awarii." />
   <meta property="og:type" content="website" />
@@ -30,26 +24,21 @@
   <meta property="og:image" content="https://abedyk.github.io/arwo-elektryka/arwo-elektryka-logo.png" />
   <meta property="og:image:alt" content="ARWO - Elektryka – logo" />
 
-  <!-- === Twitter Cards === -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="ARWO - Elektryka Łódź – Usługi elektryczne" />
   <meta name="twitter:description" content="Elektryk Łódź i woj. łódzkie. Montaż, modernizacje, pomiary, oświetlenie, awarie." />
   <meta name="twitter:image" content="https://abedyk.github.io/arwo-elektryka/arwo-elektryka-logo.png" />
 
-  <!-- === Google Search Console (wklej swój token) === -->
   <meta name="google-site-verification" content="PASTE_YOUR_TOKEN_HERE" />
 
-  <!-- === Tailwind === -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- === Style pomocnicze === -->
   <style>
     html { scroll-behavior: smooth; }
-    /* padding-top ustawiany dynamicznie w JS na podstawie wysokości topbaru */
-    body { padding-top: 0; }
+    /* padding-top ustawiamy dynamicznie w JS; dodaj płynny efekt przy chowaniu/pokazywaniu */
+    body { padding-top: 0; transition: padding-top 250ms ease; }
   </style>
 
-  <!-- === Dane strukturalne: LocalBusiness (Schema.org) === -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -72,10 +61,11 @@
 </head>
 <body class="bg-neutral-50 text-neutral-800">
 
-  <!-- Stały górny pasek z logiem i efektami; responsywny układ bez nachodzenia -->
-  <div id="topbar" class="fixed top-0 left-0 w-full bg-neutral-900/100 backdrop-blur-md text-neutral-100 z-50 shadow-lg transition-all duration-300">
+  <!-- === TOPBAR (widoczny na starcie; ukrywa się na mobile; na md+ zawsze widoczny) === -->
+  <div id="topbar"
+       class="fixed top-0 left-0 w-full bg-neutral-900/100 backdrop-blur-md text-neutral-100 z-50 shadow-lg
+              transition-all duration-300 will-change-transform translate-y-0 md:translate-y-0">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 py-2">
-      <!-- Uwaga: kolumna na mobile, rząd od md w górę -->
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-0">
 
         <!-- Logo + nazwa -->
@@ -85,9 +75,9 @@
           <span class="font-semibold text-base sm:text-lg md:text-xl truncate">ARWO - Elektryka</span>
         </div>
 
-        <!-- Kontakty: pełna szerokość na mobile (3 wiersze), w jednej linii od md -->
+        <!-- Kontakty -->
         <div class="w-full md:w-auto flex flex-col md:flex-row md:items-center gap-2 md:gap-4 text-sm md:text-[0.95rem]">
-          <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-white/0 hover:bg-white/5 px-3 py-2 w-full md:w-auto whitespace-nowrap"
+          <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 hover:bg-white/5 px-3 py-2 w-full md:w-auto whitespace-nowrap"
              href="tel:+48579980110">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5l4 1 2 5-2 1a16 16 0 007 7l1-2 5 2 1 4c-7 2-15-6-17-13z"/>
@@ -95,7 +85,7 @@
             +48 579 980 110
           </a>
 
-          <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-white/0 hover:bg-white/5 px-3 py-2 w-full md:w-auto whitespace-nowrap"
+          <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 hover:bg-white/5 px-3 py-2 w-full md:w-auto whitespace-nowrap"
              href="tel:+48607402802">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5l4 1 2 5-2 1a16 16 0 007 7l1-2 5 2 1 4c-7 2-15-6-17-13z"/>
@@ -103,7 +93,7 @@
             +48 607 402 802
           </a>
 
-          <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-white/0 hover:bg-white/5 px-3 py-2 w-full md:w-auto break-all"
+          <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 hover:bg-white/5 px-3 py-2 w-full md:w-auto break-all"
              href="mailto:arwo.elektryka@gmail.com">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16v12H4z"/>
@@ -118,36 +108,133 @@
   </div>
 
   <script>
-    // Pasek: pełny czarny u góry, półprzezroczysty po przewinięciu
+    // --- Parametry ---
+    const MD_BREAKPOINT = 768;       // Tailwind md
+    const TOP_OPACITY_SCROLL = 50;   // kiedy zmienić krycie topbaru
+
+    // Stan logiki "tylko po kliknięciu na dole"
+    // Po pierwszym schowaniu na mobile blokujemy pokazywanie nagłówka aż do kliknięcia strzałki na dole.
+    let lockHidden = false;          // gdy true -> nie pokazujemy topbaru podczas scrolla
+    let hasHiddenOnce = false;       // czy już chowaliśmy (by zadziałał lock)
+
+    // Utilsy
+    const topbar = document.getElementById('topbar');
+
+    function isMobile() { return window.innerWidth < MD_BREAKPOINT; }
+
+    function setBodyPaddingTop(valuePx) {
+      document.body.style.paddingTop = valuePx + 'px';
+    }
+
+    function showTopbar() {
+      topbar.classList.remove('-translate-y-full');
+      topbar.classList.add('translate-y-0');
+      setBodyPaddingTop(topbar.offsetHeight);
+    }
+
+    function hideTopbar() {
+      topbar.classList.remove('translate-y-0');
+      topbar.classList.add('-translate-y-full');
+      setBodyPaddingTop(0);
+    }
+
     function applyTopbarScrollState() {
-      const topbar = document.getElementById('topbar');
-      if (window.scrollY > 50) {
+      if (window.scrollY > TOP_OPACITY_SCROLL) {
         topbar.classList.remove('bg-neutral-900/100');
-        topbar.classList.add('bg-neutral-900/60', 'shadow-md');
+        topbar.classList.add('bg-neutral-900/60','shadow-md');
       } else {
-        topbar.classList.remove('bg-neutral-900/60', 'shadow-md');
+        topbar.classList.remove('bg-neutral-900/60','shadow-md');
         topbar.classList.add('bg-neutral-900/100');
       }
     }
-    window.addEventListener('scroll', applyTopbarScrollState, { passive: true });
-    applyTopbarScrollState();
 
-    // Dynamiczne dopasowanie paddingu body do aktualnej wysokości topbaru (po wrapowaniu)
-    function setBodyPaddingTop() {
-      const topbar = document.getElementById('topbar');
-      document.body.style.paddingTop = topbar.offsetHeight + 'px';
+    function atBottom() {
+      const doc = document.documentElement;
+      return (window.innerHeight + window.scrollY) >= (doc.scrollHeight - 2);
     }
-    window.addEventListener('load', setBodyPaddingTop);
-    window.addEventListener('resize', setBodyPaddingTop);
-    // drobna obserwacja ewentualnych zmian układu (np. webfonty)
-    new ResizeObserver(setBodyPaddingTop).observe(document.getElementById('topbar'));
+
+    // --- Inicjalizacja: na starcie zawsze pokazany, dopasuj padding ---
+    window.addEventListener('load', () => {
+      showTopbar();
+      applyTopbarScrollState();
+    });
+
+    // Utrzymuj padding przy zmianach rozmiaru (na desktopie zawsze widoczny)
+    window.addEventListener('resize', () => {
+      if (!isMobile()) {
+        lockHidden = false;
+        showTopbar();
+      } else {
+        // na mobile zachowujemy obecny stan (jeśli schowany i zablokowany, zostaje ukryty)
+        if (topbar.classList.contains('-translate-y-full')) setBodyPaddingTop(0);
+        else setBodyPaddingTop(topbar.offsetHeight);
+      }
+    });
+
+    new ResizeObserver(() => {
+      // jeśli pasek jest widoczny, aktualizuj padding po zmianie wysokości
+      if (!topbar.classList.contains('-translate-y-full')) {
+        setBodyPaddingTop(topbar.offsetHeight);
+      }
+    }).observe(topbar);
+
+    // --- Scroll handler ---
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const y = window.scrollY;
+
+          if (isMobile()) {
+            // Po pierwszym przewinięciu w dół chowamy i "blokujemy" do czasu kliknięcia strzałki na samym dole
+            if (y > 4 && !hasHiddenOnce) {
+              hideTopbar();
+              hasHiddenOnce = true;
+              lockHidden = true;
+            }
+            // Dopóki lockHidden = true, nie pokazujemy topbaru przy przewijaniu (nawet do góry)
+          } else {
+            // Desktop: zawsze widoczny
+            showTopbar();
+          }
+
+          applyTopbarScrollState();
+          lastY = y;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // --- Integracja ze strzałką „powrót na górę” ---
+    window.addEventListener('DOMContentLoaded', () => {
+      const scrollBtn = document.getElementById('scrollTopBtn');
+      if (!scrollBtn) return;
+
+      scrollBtn.addEventListener('click', () => {
+        // topbar ma się pokazać tylko wtedy, gdy KLIK na samym dole i tylko na mobile
+        if (isMobile() && atBottom()) {
+          lockHidden = false;       // odblokuj
+          showTopbar();             // pokaż pasek teraz
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, { passive: true });
+    });
+
+    // Opcjonalnie: na desktopie zapewnij stałą widoczność przy zmianie scrolla
+    window.addEventListener('scroll', () => {
+      if (!isMobile()) showTopbar();
+    }, { passive: true });
   </script>
 
-  <!-- HERO z logotypem wyśrodkowanym i dopasowanym tłem -->
+  <!-- HERO -->
   <header class="relative overflow-hidden bg-[#f9f8f3]">
     <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
       <div class="grid md:grid-cols-2 gap-10 items-center">
-        <!-- Lewa kolumna: tekst -->
         <div>
           <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-neutral-900">
             Usługi elektryczne<br>
@@ -163,7 +250,6 @@
           </div>
         </div>
 
-        <!-- Prawa kolumna: logo "sticky" tylko w obrębie hero -->
         <div class="relative flex justify-center md:justify-end">
           <div class="sticky top-24 md:top-28 lg:top-32">
             <img
@@ -188,11 +274,11 @@
         <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Podłączenie gniazd i włączników</h3></div>
         <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Montaż lamp / oświetlenia</h3></div>
         <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Montaż rozdzielnic</h3></div>
-        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Podłączanie płyt grzewczych</h3></div>
-        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Wymiana tablic licznikowych</h3></div>
-        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Przyłącza</h3></div>
-        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Usuwanie awarii</h3></div>
-        <div class="p-6 bg-white rounded-2xl shadow border border-neutral-200"><h3 class="font-semibold">Projekty i pomiary</h3></div>
+        <div class="p-6 bg-white rounded-2xl shadow border-neutral-200 shadow"><h3 class="font-semibold">Podłączanie płyt grzewczych</h3></div>
+        <div class="p-6 bg-white rounded-2xl border border-neutral-200 shadow"><h3 class="font-semibold">Wymiana tablic licznikowych</h3></div>
+        <div class="p-6 bg-white rounded-2xl border border-neutral-200 shadow"><h3 class="font-semibold">Przyłącza</h3></div>
+        <div class="p-6 bg-white rounded-2xl border border-neutral-200 shadow"><h3 class="font-semibold">Usuwanie awarii</h3></div>
+        <div class="p-6 bg-white rounded-2xl border border-neutral-200 shadow"><h3 class="font-semibold">Projekty i pomiary</h3></div>
       </div>
     </div>
   </section>
@@ -245,7 +331,6 @@
       <h2 class="text-3xl font-bold">Kontakt i szybkie zgłoszenie</h2>
       <p class="text-neutral-600 mt-1">Najlepiej zadzwonić. Możesz też wysłać wiadomość z opisem zlecenia.</p>
       <div class="grid md:grid-cols-3 gap-8 mt-8">
-        <!-- Formularz -->
         <div class="md:col-span-2 bg-white rounded-2xl border border-neutral-200 shadow p-6">
           <form name="kontakt" class="space-y-4" onsubmit="event.preventDefault(); alert('Dziękujemy! Odezwiemy się wkrótce.');">
             <div>
@@ -282,7 +367,7 @@
           </form>
         </div>
 
-        <!-- Karta szybkiego kontaktu (bez zmian) -->
+        <!-- Karta szybkiego kontaktu (jak było) -->
         <div class="space-y-4">
           <div class="rounded-2xl border border-neutral-200 bg-white shadow p-4">
             <h3 class="font-semibold">Szybki kontakt</h3>
@@ -296,7 +381,6 @@
                 <span class="text-sm peer-checked:font-semibold peer-checked:text-teal-700">WhatsApp</span>
               </label>
             </div>
-
             <ul class="mt-4 space-y-3">
               <li class="flex items-center gap-3">
                 <div class="flex-1 inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white shadow p-3">
@@ -320,7 +404,6 @@
                   <span class="hidden sm:inline">Połącz</span>
                 </a>
               </li>
-
               <li class="flex items-center gap-3">
                 <div class="flex-1 inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white shadow p-3">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -343,7 +426,6 @@
                   <span class="hidden sm:inline">Połącz</span>
                 </a>
               </li>
-
               <li>
                 <a class="inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white shadow p-3 hover:border-amber-300 w-full"
                    href="mailto:arwo.elektryka@gmail.com">
@@ -357,7 +439,7 @@
             </ul>
           </div>
         </div>
-        <!-- /Karta szybkiego kontaktu -->
+
       </div>
     </div>
   </section>
@@ -374,7 +456,7 @@
     </div>
   </footer>
 
-  <!-- Przycisk powrotu do góry -->
+  <!-- Przycisk powrotu do góry (fade-in + scale) -->
   <button id="scrollTopBtn"
     class="fixed bottom-6 right-6 z-50 bg-teal-700 hover:bg-teal-800 text-white rounded-full w-12 h-12 shadow-xl flex items-center justify-center
            opacity-0 pointer-events-none scale-75 translate-y-2 transition-all duration-300"
@@ -410,10 +492,9 @@
       });
     })();
 
-    // Przełączanie trybu: Telefon / WhatsApp dla przycisków przy numerach
+    // Przełączanie Telefon / WhatsApp
     (function () {
       let mode = 'phone'; // domyślnie
-
       const radios = document.querySelectorAll('input[name="callMode"]');
 
       const rows = [
@@ -441,11 +522,11 @@
           if (!r.btn) return;
           r.btn.href = formatHref(r.number);
           if (mode === 'whatsapp') {
-            r.iconPhone.classList.add('hidden');
-            r.iconWA.classList.remove('hidden');
+            r.iconPhone?.classList.add('hidden');
+            r.iconWA?.classList.remove('hidden');
           } else {
-            r.iconWA.classList.add('hidden');
-            r.iconPhone.classList.remove('hidden');
+            r.iconWA?.classList.add('hidden');
+            r.iconPhone?.classList.remove('hidden');
           }
         });
       }

@@ -9,6 +9,7 @@
   <meta name="keywords" content="elektryk Łódź, usługi elektryczne Łódź, instalacje elektryczne Łódź, pomiary elektryczne Łódź, awarie prądu Łódź, ARWO - Elektryka, województwo łódzkie" />
   <meta name="robots" content="index,follow" />
 
+  <!-- Geotagi -->
   <meta name="geo.region" content="PL-LD" />
   <meta name="geo.placename" content="Łódź" />
   <meta name="geo.position" content="51.7592;19.4550" />
@@ -17,6 +18,7 @@
   <link rel="canonical" href="https://abedyk.github.io/arwo-elektryka/" />
   <link rel="icon" type="image/png" href="arwo-elektryka-logo.png">
 
+  <!-- Open Graph -->
   <meta property="og:title" content="ARWO - Elektryka Łódź – Usługi elektryczne" />
   <meta property="og:description" content="Elektryk Łódź i woj. łódzkie. Montaż instalacji, modernizacje, pomiary, oświetlenie, usuwanie awarii." />
   <meta property="og:type" content="website" />
@@ -24,6 +26,7 @@
   <meta property="og:image" content="https://abedyk.github.io/arwo-elektryka/arwo-elektryka-logo.png" />
   <meta property="og:image:alt" content="ARWO - Elektryka – logo" />
 
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="ARWO - Elektryka Łódź – Usługi elektryczne" />
   <meta name="twitter:description" content="Elektryk Łódź i woj. łódzkie. Montaż, modernizacje, pomiary, oświetlenie, awarie." />
@@ -31,14 +34,16 @@
 
   <meta name="google-site-verification" content="PASTE_YOUR_TOKEN_HERE" />
 
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
     html { scroll-behavior: smooth; }
-    /* padding-top ustawiamy dynamicznie w JS; dodaj płynny efekt przy chowaniu/pokazywaniu */
-    body { padding-top: 0; transition: padding-top 250ms ease; }
+    /* padding-top ustawiany dynamicznie w JS */
+    body { padding-top: 0; transition: padding-top 220ms ease; }
   </style>
 
+  <!-- Dane strukturalne -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -61,7 +66,7 @@
 </head>
 <body class="bg-neutral-50 text-neutral-800">
 
-  <!-- === TOPBAR (widoczny na starcie; ukrywa się na mobile; na md+ zawsze widoczny) === -->
+  <!-- === TOPBAR: na mobile chowany przy scrollu, pojawia się TYLKO na górze; na md+ zawsze widoczny === -->
   <div id="topbar"
        class="fixed top-0 left-0 w-full bg-neutral-900/100 backdrop-blur-md text-neutral-100 z-50 shadow-lg
               transition-all duration-300 will-change-transform translate-y-0 md:translate-y-0">
@@ -84,7 +89,6 @@
             </svg>
             +48 579 980 110
           </a>
-
           <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 hover:bg-white/5 px-3 py-2 w-full md:w-auto whitespace-nowrap"
              href="tel:+48607402802">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -92,7 +96,6 @@
             </svg>
             +48 607 402 802
           </a>
-
           <a class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-white/10 hover:bg-white/5 px-3 py-2 w-full md:w-auto break-all"
              href="mailto:arwo.elektryka@gmail.com">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -108,38 +111,29 @@
   </div>
 
   <script>
-    // --- Parametry ---
-    const MD_BREAKPOINT = 768;       // Tailwind md
-    const TOP_OPACITY_SCROLL = 50;   // kiedy zmienić krycie topbaru
+    // --- USTAWIENIA ---
+    const MD_BREAKPOINT = 768;      // Tailwind md
+    const OPACITY_SCROLL = 50;      // kiedy zmienić krycie topbaru
+    const HIDE_DELTA = 10;          // minimalny ruch w dół, aby schować pasek
 
-    // Stan logiki "tylko po kliknięciu na dole"
-    // Po pierwszym schowaniu na mobile blokujemy pokazywanie nagłówka aż do kliknięcia strzałki na dole.
-    let lockHidden = false;          // gdy true -> nie pokazujemy topbaru podczas scrolla
-    let hasHiddenOnce = false;       // czy już chowaliśmy (by zadziałał lock)
-
-    // Utilsy
+    // --- UTILSY ---
     const topbar = document.getElementById('topbar');
+    function isMobile(){ return window.innerWidth < MD_BREAKPOINT; }
+    function atTop(){ return window.scrollY <= 0; }
 
-    function isMobile() { return window.innerWidth < MD_BREAKPOINT; }
-
-    function setBodyPaddingTop(valuePx) {
-      document.body.style.paddingTop = valuePx + 'px';
-    }
-
-    function showTopbar() {
+    function setBodyPaddingTop(px){ document.body.style.paddingTop = px + 'px'; }
+    function showTopbar(){
       topbar.classList.remove('-translate-y-full');
       topbar.classList.add('translate-y-0');
       setBodyPaddingTop(topbar.offsetHeight);
     }
-
-    function hideTopbar() {
+    function hideTopbar(){
       topbar.classList.remove('translate-y-0');
       topbar.classList.add('-translate-y-full');
       setBodyPaddingTop(0);
     }
-
-    function applyTopbarScrollState() {
-      if (window.scrollY > TOP_OPACITY_SCROLL) {
+    function applyOpacity(){
+      if (window.scrollY > OPACITY_SCROLL) {
         topbar.classList.remove('bg-neutral-900/100');
         topbar.classList.add('bg-neutral-900/60','shadow-md');
       } else {
@@ -148,59 +142,50 @@
       }
     }
 
-    function atBottom() {
-      const doc = document.documentElement;
-      return (window.innerHeight + window.scrollY) >= (doc.scrollHeight - 2);
-    }
-
-    // --- Inicjalizacja: na starcie zawsze pokazany, dopasuj padding ---
+    // --- INICJALIZACJA ---
     window.addEventListener('load', () => {
-      showTopbar();
-      applyTopbarScrollState();
+      showTopbar();         // na starcie widoczny
+      applyOpacity();
     });
 
-    // Utrzymuj padding przy zmianach rozmiaru (na desktopie zawsze widoczny)
+    // Utrzymuj padding po zmianie rozmiaru / wysokości topbaru
     window.addEventListener('resize', () => {
       if (!isMobile()) {
-        lockHidden = false;
-        showTopbar();
+        showTopbar();       // desktop zawsze widoczny
       } else {
-        // na mobile zachowujemy obecny stan (jeśli schowany i zablokowany, zostaje ukryty)
+        // zachowaj obecny stan
         if (topbar.classList.contains('-translate-y-full')) setBodyPaddingTop(0);
         else setBodyPaddingTop(topbar.offsetHeight);
       }
     });
-
     new ResizeObserver(() => {
-      // jeśli pasek jest widoczny, aktualizuj padding po zmianie wysokości
-      if (!topbar.classList.contains('-translate-y-full')) {
-        setBodyPaddingTop(topbar.offsetHeight);
-      }
+      if (!topbar.classList.contains('-translate-y-full')) setBodyPaddingTop(topbar.offsetHeight);
     }).observe(topbar);
 
-    // --- Scroll handler ---
+    // --- SCROLL: mobile -> chowa się przy ruchu w dół; pojawia się WYŁĄCZNIE gdy jesteśmy na górze ---
     let lastY = window.scrollY;
     let ticking = false;
 
-    function onScroll() {
-      if (!ticking) {
+    function onScroll(){
+      if (!ticking){
         window.requestAnimationFrame(() => {
           const y = window.scrollY;
+          const delta = y - lastY;
 
-          if (isMobile()) {
-            // Po pierwszym przewinięciu w dół chowamy i "blokujemy" do czasu kliknięcia strzałki na samym dole
-            if (y > 4 && !hasHiddenOnce) {
-              hideTopbar();
-              hasHiddenOnce = true;
-              lockHidden = true;
+          if (isMobile()){
+            if (atTop()){
+              // tylko na samej górze ponownie pokaż
+              showTopbar();
+            } else {
+              // nie jesteśmy na górze: chowaj przy ruchu w dół, nie pokazuj przy ruchu w górę
+              if (delta > HIDE_DELTA) hideTopbar();
             }
-            // Dopóki lockHidden = true, nie pokazujemy topbaru przy przewijaniu (nawet do góry)
           } else {
-            // Desktop: zawsze widoczny
+            // desktop bez zmian
             showTopbar();
           }
 
-          applyTopbarScrollState();
+          applyOpacity();
           lastY = y;
           ticking = false;
         });
@@ -209,32 +194,13 @@
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
-
-    // --- Integracja ze strzałką „powrót na górę” ---
-    window.addEventListener('DOMContentLoaded', () => {
-      const scrollBtn = document.getElementById('scrollTopBtn');
-      if (!scrollBtn) return;
-
-      scrollBtn.addEventListener('click', () => {
-        // topbar ma się pokazać tylko wtedy, gdy KLIK na samym dole i tylko na mobile
-        if (isMobile() && atBottom()) {
-          lockHidden = false;       // odblokuj
-          showTopbar();             // pokaż pasek teraz
-        }
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, { passive: true });
-    });
-
-    // Opcjonalnie: na desktopie zapewnij stałą widoczność przy zmianie scrolla
-    window.addEventListener('scroll', () => {
-      if (!isMobile()) showTopbar();
-    }, { passive: true });
   </script>
 
   <!-- HERO -->
   <header class="relative overflow-hidden bg-[#f9f8f3]">
     <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
       <div class="grid md:grid-cols-2 gap-10 items-center">
+        <!-- Lewa kolumna: tekst -->
         <div>
           <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-neutral-900">
             Usługi elektryczne<br>
@@ -250,6 +216,7 @@
           </div>
         </div>
 
+        <!-- Prawa kolumna: logo "sticky" -->
         <div class="relative flex justify-center md:justify-end">
           <div class="sticky top-24 md:top-28 lg:top-32">
             <img
@@ -331,6 +298,7 @@
       <h2 class="text-3xl font-bold">Kontakt i szybkie zgłoszenie</h2>
       <p class="text-neutral-600 mt-1">Najlepiej zadzwonić. Możesz też wysłać wiadomość z opisem zlecenia.</p>
       <div class="grid md:grid-cols-3 gap-8 mt-8">
+        <!-- Formularz -->
         <div class="md:col-span-2 bg-white rounded-2xl border border-neutral-200 shadow p-6">
           <form name="kontakt" class="space-y-4" onsubmit="event.preventDefault(); alert('Dziękujemy! Odezwiemy się wkrótce.');">
             <div>
@@ -367,7 +335,7 @@
           </form>
         </div>
 
-        <!-- Karta szybkiego kontaktu (jak było) -->
+        <!-- Karta szybkiego kontaktu -->
         <div class="space-y-4">
           <div class="rounded-2xl border border-neutral-200 bg-white shadow p-4">
             <h3 class="font-semibold">Szybki kontakt</h3>
@@ -456,7 +424,7 @@
     </div>
   </footer>
 
-  <!-- Przycisk powrotu do góry (fade-in + scale) -->
+  <!-- Przycisk powrotu do góry -->
   <button id="scrollTopBtn"
     class="fixed bottom-6 right-6 z-50 bg-teal-700 hover:bg-teal-800 text-white rounded-full w-12 h-12 shadow-xl flex items-center justify-center
            opacity-0 pointer-events-none scale-75 translate-y-2 transition-all duration-300"
@@ -467,7 +435,7 @@
   </button>
 
   <script>
-    // Scroll-to-top — fade/scale in/out
+    // Widoczność przycisku "powrót na górę"
     (function () {
       const scrollBtn = document.getElementById("scrollTopBtn");
       const showAt = 400; // px
@@ -487,16 +455,16 @@
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
 
+      // Klik strzałki: zawsze przewijaj do góry.
       scrollBtn.addEventListener("click", () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
     })();
 
-    // Przełączanie Telefon / WhatsApp
+    // Telefon / WhatsApp (jak było)
     (function () {
-      let mode = 'phone'; // domyślnie
+      let mode = 'phone';
       const radios = document.querySelectorAll('input[name="callMode"]');
-
       const rows = [
         {
           btn: document.getElementById('actionBtn1'),
@@ -511,34 +479,20 @@
           number: document.getElementById('actionBtn2')?.dataset.number || '+48607402802'
         }
       ];
-
-      function formatHref(number) {
-        const digits = number.replace(/\D/g, '');
-        return mode === 'whatsapp' ? ('https://wa.me/' + digits) : ('tel:' + number);
-      }
-
-      function updateButtons() {
-        rows.forEach(r => {
+      function formatHref(number){ const digits = number.replace(/\D/g,''); return mode==='whatsapp' ? ('https://wa.me/'+digits) : ('tel:'+number); }
+      function updateButtons(){
+        rows.forEach(r=>{
           if (!r.btn) return;
           r.btn.href = formatHref(r.number);
-          if (mode === 'whatsapp') {
-            r.iconPhone?.classList.add('hidden');
-            r.iconWA?.classList.remove('hidden');
-          } else {
-            r.iconWA?.classList.add('hidden');
-            r.iconPhone?.classList.remove('hidden');
-          }
+          if (mode==='whatsapp'){ r.iconPhone?.classList.add('hidden'); r.iconWA?.classList.remove('hidden'); }
+          else { r.iconWA?.classList.add('hidden'); r.iconPhone?.classList.remove('hidden'); }
         });
       }
-
-      radios.forEach(r => r.addEventListener('change', e => {
-        mode = e.target.value;
-        updateButtons();
-      }));
-
-      updateButtons(); // inicjalizacja
+      radios.forEach(r=>r.addEventListener('change', e => { mode = e.target.value; updateButtons(); }));
+      updateButtons();
     })();
 
+    // Rok w stopce
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
